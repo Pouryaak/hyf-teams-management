@@ -1,0 +1,22 @@
+.mat-nav-list .mat-list-item:not(:last-child) {
+  border-bottom: 1px solid #e0e0e0;
+}
+.mat-nav-list .mat-list-item {
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  padding-right: 10px;
+}
+.mat-nav-list .mat-list-item.active {
+  background-color: #293a7d;
+  color: white !important;
+}
+
+::ng-deep .mat-nav-list .mat-list-item.active span span {
+  /* Your styles here */
+  color: white !important;
+}
+
+.sidenav-content {
+  padding: 20px;
+}

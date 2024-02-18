@@ -1,4 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Custom color palette for #293a7d
+$custom-primary: (
+  50: #e6e7ee,
+  100: #bfc2d9,
+  200: #949bc1,
+  300: #6974a9,
+  400: #475395,
+  500: #293a7d,
+  // Your primary color
+  600: #253475,
+  700: #1f2b6a,
+  800: #192360,
+  900: #0f1748,
+  A100: #b3b6ff,
+  A200: #8084ff,
+  A400: #4d52ff,
+  A700: #3438ff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    // Assume white contrast for the default 500 shade
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff,
+  ),
+);
+
+// // Define default palettes for accent and warn
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette($custom-primary),
+      accent: mat.define-palette(mat.$pink-palette),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+  )
+);
+
+// // Include all component themes
+@include mat.core-theme($my-theme);
+// For each component used, include its theme. Example for a button:
+@include mat.button-theme($my-theme);
+@include mat.all-component-themes($my-theme);
