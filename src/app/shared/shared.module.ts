@@ -7,11 +7,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar'; // Import Angular Material modules used in your shared components
 import { RouterModule } from '@angular/router'; // Import RouterModule if you're using routerLink in your components
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FlexContainerComponent } from './components/flex-container/flex-container.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, SidenavComponent, DashboardComponent],
+  declarations: [ToolbarComponent, SidenavComponent, DashboardComponent, PageHeaderComponent, FlexContainerComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -24,7 +26,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   exports: [
     DashboardComponent,
     ToolbarComponent,
-    SidenavComponent
+    SidenavComponent,
+    PageHeaderComponent,
+    FlexContainerComponent
   ]
 })
 export class SharedModule {}

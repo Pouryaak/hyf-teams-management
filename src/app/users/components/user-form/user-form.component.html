@@ -1,0 +1,57 @@
+<app-page-header
+  [title]="userId ? 'Update Member' : 'Add New Member'"
+  [haveBack]="true"
+/>
+<mat-card class="user-form-container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <app-flex-container
+      flexDirection="row"
+      justifyContent="space-around"
+      alignItems="center"
+      gap="40px"
+    >
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+    </app-flex-container>
+    <app-flex-container
+      flexDirection="row"
+      justifyContent="space-around"
+      alignItems="center"
+      gap="40px"
+    >
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">{{
+            role
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+    </app-flex-container>
+    <!-- Role Dropdown -->
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!userForm.valid"
+    >
+      {{ userId ? "Update" : "Create" }}
+    </button>
+  </form>
+</mat-card>
