@@ -12,9 +12,12 @@ export class FirestoreDataService<T> {
     this.collection = afs.collection<T>(collection);
   }
 
-  add(item: T, id?: string): Promise<void> {
-    const docId = id || this.afs.createId();
-    return this.collection.doc(docId).set(item);
+  add(item: T, uid?: string): Promise<void> {
+    // @ts-ignore: Unreachable code error
+    const { id, ...restOfItem } = item;
+    const docId = uid || this.afs.createId();
+    // @ts-ignore: Unreachable code error
+    return this.collection.doc(docId).set(restOfItem);
   }
 
   getAll(): Observable<T[]> {

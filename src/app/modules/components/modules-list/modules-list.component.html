@@ -1,0 +1,11 @@
+<app-custom-table
+  [data]="(modules$ | async) ?? []"
+  [columns]="columns"
+  [isLoading]="isLoading"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+>
+  <ng-template #customRowTemplate let-row>
+    <td>{{ row.name }}</td>
+  </ng-template>
+</app-custom-table>

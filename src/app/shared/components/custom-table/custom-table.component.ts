@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 
 interface TableColumn {
   key: string;
@@ -16,6 +16,7 @@ export class CustomTableComponent implements OnInit {
   @Input() isLoading: boolean = false;
    @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
+  @ContentChild(TemplateRef) customRowTemplate?: TemplateRef<any>;
 
   displayedColumns: string[] = [];
 

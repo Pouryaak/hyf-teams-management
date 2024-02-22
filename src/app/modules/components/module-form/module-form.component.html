@@ -1,0 +1,75 @@
+<app-page-header
+  [title]="moduleId ? 'Update Module' : 'Add New Module'"
+  [haveBack]="true"
+></app-page-header>
+<mat-card class="module-form-container">
+  <form [formGroup]="moduleForm" (ngSubmit)="onSubmit()">
+    <app-flex-container
+      flexDirection="row"
+      justifyContent="space-around"
+      alignItems="center"
+      gap="40px"
+    >
+      <!-- Name -->
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="moduleForm.get('name')?.errors?.['required']">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+    </app-flex-container>
+
+    <app-flex-container
+      flexDirection="row"
+      justifyContent="space-around"
+      alignItems="center"
+      gap="40px"
+    >
+      <!-- Starting Date -->
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Starting Date</mat-label>
+        <input
+          matInput
+          formControlName="startingDate"
+          [matDatepicker]="picker1"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="moduleForm.get('startingDate')?.errors?.['required']">
+          Starting date is required.
+        </mat-error>
+      </mat-form-field>
+      <!-- Ending Date -->
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Ending Date</mat-label>
+        <input
+          matInput
+          formControlName="endingDate"
+          [matDatepicker]="picker2"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="moduleForm.get('endingDate')?.errors?.['required']">
+          Ending date is required.
+        </mat-error>
+      </mat-form-field>
+    </app-flex-container>
+
+    <!-- Submit Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!moduleForm.valid"
+    >
+      {{ moduleId ? "Update Module" : "Create Module" }}
+    </button>
+  </form>
+</mat-card>

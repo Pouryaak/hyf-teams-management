@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/models/user.model';
 import { ConfirmationService } from 'src/app/shared/services/confirmation.service';
@@ -15,37 +16,39 @@ export class UsersListComponent {
 
   columns = [
     { key: 'name', title: 'Name' },
-    { key: 'email', title: 'Email' }
+    { key: 'email', title: 'Email' },
+    { key: 'role', title: 'Role' }
   ];
 
-  constructor(private usersService: UsersService, private confirm: ConfirmationService) {
+  constructor(private usersService: UsersService, private confirm: ConfirmationService, private router: Router) {
     this.users$ = this.usersService.getAll();
   }
 
   ngOnInit(): void {
     this.users$.subscribe(
       (users) => {
-        this.isLoading = false; // Handle next value
+        this.isLoading = false;
       },
       (error) => {
-        this.isLoading = false; // Handle error
+        this.isLoading = false;
         console.error('Error fetching users:', error);
       }
     );
   }
-   onEdit(user: any): void {
-    // Handle edit action
+   onEdit(user: User): void {
+    this.router.navigate([`/users/user/${user.id}`]);
   }
 
   onDelete(user: any): void {
     const dialogRef = this.confirm.openDialog({
-      title: 'Confirm Action',
-      message: 'Are you sure you want to do this?',
+      title: 'Deletion Confirmation',
+      message: 'Are you sure you want to delete this user?',
       cancelButtonLabel: 'Cancel',
-      confirmButtonLabel: 'Yes, do it',
+      confirmButtonLabel: 'Delete',
       onConfirm: () => {
-        console.log('Action confirmed');
-        close()
+        this.usersService.delete(user.id).then(() => {
+          close()
+        })
       }
     });
     const close = () => dialogRef.close();

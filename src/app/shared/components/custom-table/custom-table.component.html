@@ -27,8 +27,21 @@
       </ng-container>
 
       <!-- Header and Row Declarations -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <ng-container *ngIf="customRowTemplate; else defaultRows">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: displayedColumns;
+            template: customRowTemplate
+          "
+        ></tr>
+      </ng-container>
+      <ng-template #defaultRows>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </ng-template>
     </table>
 
     <!-- Message for empty data -->

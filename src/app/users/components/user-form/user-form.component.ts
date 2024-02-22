@@ -67,18 +67,16 @@ export class UserFormComponent {
       error: (error) => {
         console.error('Error fetching user:', error);
         this.ns.showError('Error fetching user details. Please try again.');
-      },
-      complete: () => console.log('User fetch completed'), // Optional
+      }
     });
   }
 
   onSubmit() {
     this.submitButtonDisabled = true;
     if (this.userForm.valid) {
-      const { id, ...userDetailsWithoutId } = this.userForm.value;
       if (this.userId) {
         this.usersService
-          .update(this.userId, userDetailsWithoutId)
+          .update(this.userId, this.userForm.value)
           .then(() => {
             this.ns.showSuccess('User updated successfully!');
             this.submitButtonDisabled = false;
@@ -90,7 +88,7 @@ export class UserFormComponent {
           });
       } else {
         this.usersService
-          .addUserIfNotExists(userDetailsWithoutId)
+          .addUserIfNotExists(this.userForm.value)
           .then(() => {
             this.ns.showSuccess('User added successfully!');
             this.userForm.reset();
