@@ -4,16 +4,17 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Observable, filter } from 'rxjs';
 
+
 export class FirestoreDataService<T> {
   private collection: AngularFirestoreCollection<T>;
 
-  constructor(private afs: AngularFirestore, collection: string) {
+  constructor(protected afs: AngularFirestore, collection: string) {
     this.collection = afs.collection<T>(collection);
   }
 
-  add(item: T): Promise<void> {
-    const id = this.afs.createId();
-    return this.collection.doc(id).set(item);
+  add(item: T, id?: string): Promise<void> {
+    const docId = id || this.afs.createId();
+    return this.collection.doc(docId).set(item);
   }
 
   getAll(): Observable<T[]> {

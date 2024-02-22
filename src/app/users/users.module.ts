@@ -29,7 +29,7 @@ import { UsersRoutingModule } from './users-routing.module';
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
 export class UsersModule { }

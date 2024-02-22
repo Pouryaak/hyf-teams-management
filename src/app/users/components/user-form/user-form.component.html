@@ -35,12 +35,6 @@
           }}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!-- Password -->
-      <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" />
-      </mat-form-field>
     </app-flex-container>
     <!-- Role Dropdown -->
 
@@ -49,7 +43,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!userForm.valid"
+      [disabled]="!userForm.valid || submitButtonDisabled"
     >
       {{ userId ? "Update" : "Create" }}
     </button>

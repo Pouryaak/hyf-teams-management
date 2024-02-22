@@ -1,1 +1,15 @@
-<p>users-list works!</p>
+<app-custom-table
+  [data]="(users$ | async) ?? []"
+  [columns]="columns"
+  [isLoading]="isLoading"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+>
+  <ng-template let-user>
+    <tr>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <!-- Customize further as needed -->
+    </tr>
+  </ng-template>
+</app-custom-table>
